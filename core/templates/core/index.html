@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="mt-8 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-8 text-3xl text-center font-semibold">Newest Items</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for item in items %}
+                <div class="rounded-lg bg-white shadow-md overflow-hidden">
+                    <a href="{% url 'item:detail' item.id %}">
+                        <img src="{{ item.image.url }}" class="w-full h-56 object-cover object-center" alt="{{ item.name }}">
+                    </a>
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold mb-2">
+                            <a href="{% url 'item:detail' item.id %}" class="text-gray-900 hover:text-teal-500">{{ item.name }}</a>
+                        </h2>
+                        <p class="text-gray-700">Price: {{ item.price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mt-8 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-8 text-3xl text-center font-semibold">Categories</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for category in categories %}
+                <div class="rounded-lg bg-white shadow-md overflow-hidden">
+                    <a href="#" class="block">
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold mb-2">{{ category.name }}</h2>
+                            <p class="text-gray-700">{{ category.items.count }} items</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

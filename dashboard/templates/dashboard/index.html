@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="mt-8 px-6 py-12 bg-gray-100 rounded-xl">
+        <h2 class="mb-8 text-3xl text-center font-semibold text-teal-700">My Items</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for item in items %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="{% url 'item:detail' item.id %}">
+                        <div class="h-48 overflow-hidden">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <!-- Placeholder image or message for items without an image -->
+                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                    <span class="text-gray-500">No Image</span>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold text-gray-800">{{ item.name }}</h2>
+                            <p class="mt-2 text-gray-600">Price: {{ item.price }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
