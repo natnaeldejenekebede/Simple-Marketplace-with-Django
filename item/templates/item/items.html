@@ -7,7 +7,6 @@
         <div class="col-span-1 bg-white p-6 rounded-xl shadow-md">
             <form method="get" action="{% url 'item:items' %}">
                 <input name="query" class="w-full py-3 px-4 border rounded-xl focus:outline-none focus:border-teal-500" type="text" value="{{ query }}" placeholder="Search for items...">
-
                 <button class="mt-4 py-3 px-6 text-lg bg-teal-500 hover:bg-teal-600 text-white rounded-xl">Search</button>
             </form>
 
@@ -33,14 +32,25 @@
         </div>
 
         <div class="col-span-3">
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {% for item in items %}
                     <div class="bg-white rounded-xl shadow-md overflow-hidden">
                         <a href="{% url 'item:detail' item.id %}">
                             <img src="{{ item.image.url }}" class="w-full h-64 object-cover object-center" alt="{{ item.name }}">
                             <div class="p-6">
                                 <h2 class="text-xl font-semibold text-gray-800">{{ item.name }}</h2>
+                                <p class="text-gray-600">Category: {{ item.category }}</p>
                                 <p class="text-gray-600">Price: {{ item.price }}</p>
+                                {% comment %} <p class="text-gray-600">{{ item.description }}</p> {% endcomment %}
+                                <a href="{% url 'item:detail' item.id %}" class="mt-4 inline-block px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700">View Details</a>
+                                <div class="mt-2">
+                                    <!-- 5 Star Icons -->
+                                    <span class="text-yellow-500">&#9733;</span>
+                                    <span class="text-yellow-500">&#9733;</span>
+                                    <span class="text-yellow-500">&#9733;</span>
+                                    <span class="text-yellow-500">&#9733;</span>
+                                    <span class="text-yellow-500">&#9733;</span>
+                                </div>
                             </div>
                         </a>
                     </div>
